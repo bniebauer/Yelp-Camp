@@ -23,7 +23,8 @@ router.post("/", isLoggedIn, function(req, res){
     var newName = req.body.name;
     var newImg = req.body.image;
     var newDesc = req.body.description;
-    var newCampground = {name: newName, image: newImg, description: newDesc};
+    var newCost = req.body.costPerNight;
+    var newCampground = {name: newName, image: newImg, description: newDesc, costPerNight: newCost};
     Campground.create(newCampground, function(err, newCampground){
         if(err){
             console.log(err);

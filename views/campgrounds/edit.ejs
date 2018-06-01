@@ -13,8 +13,11 @@
                 <div class="form-group">
                     <input class="form-control" type="text" name="campground[description]" value="<%= campground.description %>">
                 </div>
+                <div>
+                    <input class="form-control" type="text" name="campground[costPerNight]" value="<%= campground.costPerNight %>">
+                </div>
                 <div class="form-group">
-                    <button class="btn btn-lg btn-primary btn-block">Submit</button>
+                    <button class="btn btn-lg btn-warning btn-block">Update</button>
                 </div>
             </form>
             <form action="/campgrounds/<%= campground._id%>?_method=DELETE" method="POST">
