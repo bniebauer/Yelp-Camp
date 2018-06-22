@@ -12,11 +12,11 @@ var express = require("express"),
     seedDB = require("./seeds");
     
 var campgroundRoutes = require("./routes/campgrounds"),
-    commentRoutes = require("./routes/comments"),
+    postRoutes = require("./routes/posts"),
     indexRoutes = require("./routes/index");
 
-//mongoose.connect("mongodb://localhost/yelp_camp"); //Developer Database    
-mongoose.connect("mongodb://brenton:niebauer@ds133920.mlab.com:33920/yelp_camp"); //Deployed Database
+mongoose.connect("mongodb://localhost/yelp_camp"); //Developer Database    
+//mongoose.connect("mongodb://brenton:niebauer@ds133920.mlab.com:33920/yelp_camp"); //Deployed Database
 app.use(bodyParser.urlencoded({extended: true}));
 
 //PASSPORT CONFIGURATIONS
@@ -45,9 +45,9 @@ app.use(function(req, res, next){
 
 //seedDB();
 
-app.use(indexRoutes);
+app.use("/", indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
-app.use(commentRoutes);
+app.use("/campgrounds/:id/post", postRoutes);
 
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("App is running");
