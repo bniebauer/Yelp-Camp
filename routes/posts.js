@@ -23,6 +23,7 @@ router.post("/", Middleware.isLoggedIn, function(req, res){
        } else {
            Post.create(req.body.post, function(err, post){
                if(err) {
+                   req.flash("error", "Something went wrong!");
                    console.log(err);
                } else {
                    post.author.id = req.user._id;
@@ -30,6 +31,7 @@ router.post("/", Middleware.isLoggedIn, function(req, res){
                    post.save();
                    campground.posts.push(post);
                    campground.save();
+                   req.flash("success", "Post created successfully!");
                    res.redirect("/campgrounds/"+campground._id);
                }
            });
@@ -66,6 +68,7 @@ router.delete("/:post_id", Middleware.checkPostOwnership, function(req, res){
             console.log(err);
             res.redirect("back");
         } else {
+            req.flash("success", "Post deleted");
             res.redirect("/campgrounds/"+req.params.id);
         };
     });
